@@ -8,10 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employees")
@@ -31,5 +28,11 @@ public class EmployeeController {
         Employee savedEmployee = employeeService.createEmployee(employee);
         EmployeeResponse response = new EmployeeResponse("Employee created successfully", savedEmployee.getEmployeeId());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<Employee>getEmployeeById(@PathVariable Long employeeId){
+        Employee employee = employeeService.getEmployeeById(employeeId);
+        return  ResponseEntity.ok(employee);
     }
 }

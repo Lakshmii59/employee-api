@@ -26,4 +26,10 @@ public class GlobalExceptionHandler {
                 .body(message);
 
     }
+
+    @ExceptionHandler(EmployeeNotFoundException.class)
+    public ResponseEntity<String>handleEmployeeNotFoundException(EmployeeNotFoundException exception){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
 }
